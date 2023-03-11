@@ -1,6 +1,6 @@
-import "./App.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import "./App.css";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -11,7 +11,7 @@ function App() {
     axios
       .get("http://localhost:5000/api/fetch/")
       .then((res) => {
-        console.log(res.data);
+        //console.log(res.data);
         setData(res.data);
         setLoading(false);
       })
@@ -19,41 +19,43 @@ function App() {
   }, []);
 
   if (loading) {
-    return <h1>Loading...</h1>;
+    return (
+      <div className="container py-5">
+        <h1>Loading...</h1>
+      </div>
+    );
   }
 
   return (
-    <div>
-      <h1>Available books: </h1>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          flexWrap: "wrap",
-        }}
-      >
-        {data.map((book, index) => {
-          return (
-            <div key={index} className="book">
-              <img
-                src={
-                  book.image
-                    ? book.image.value
-                    : "https://islandpress.org/sites/default/files/default_book_cover_2015.jpg"
-                }
-                alt=""
-              />
-              <div>
-                <h3>{book.bookLabel.value}</h3>
-                <a href={book.author.value}>{book.authorLabel.value}</a>
-                <br />
-                <a href={book.book.value}>More info</a>
-              </div>
-            </div>
-          );
-        })}
+    <>
+      <div className="container py-5">
+        <h1>Available books: </h1>
+        <div>
+          <table id="table" className="table table-bordered">
+            <thead>
+              <tr>
+                <th>Book title</th>
+                <th>Author</th>
+                <th>Country</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((book, index) => {
+                return (
+                  <tr key={index}>
+                    <td>{book.bookLabel.value}</td>
+                    <td>{book.authorLabel.value}</td>
+                    <td>
+                      {book.countryLabel ? book.countryLabel.value : "Unknown"}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

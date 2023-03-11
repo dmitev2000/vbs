@@ -1,15 +1,3 @@
-.book {
-    border: solid 1px;
-    border-radius: 5px;
-    margin: 10px;
-    text-align: center;
-    width: 200px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: column;
-}
-
-.book img {
-    width: 100%;
+img {
+    max-height: 100px;
 }
