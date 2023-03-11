@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
+import Loader from './components/Loader/Loader';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -21,7 +22,7 @@ function App() {
   if (loading) {
     return (
       <div className="container py-5">
-        <h1>Loading...</h1>
+        <Loader />
       </div>
     );
   }
