@@ -1,3 +1,16 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
+
 img {
-    max-height: 100px;
+  max-height: 100px;
+}
+
+.page-loader {
+  min-height: calc(100vh - 170px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.page {
+  min-height: calc(100vh - 170px);
 }
