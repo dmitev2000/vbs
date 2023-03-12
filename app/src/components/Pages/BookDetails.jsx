@@ -40,9 +40,10 @@ const BookDetails = () => {
       </p>
       <p>
         Publication date:{" "}
-        {new Date(details.date.value).toString() !== "Invalid Date"
-          ? new Date(details.date.value).toString()
-          : "Unknown"}
+        {details.date === undefined ||
+        new Date(details.date.value).toString() === "Invalid Date"
+          ? "Unknown"
+          : new Date(details.date.value).toString()}
       </p>
       <p>Description: {details.bookDescription.value}</p>
       {details.image && (

@@ -16,7 +16,7 @@ export const FetchBooks = async (req, res, next) => {
                     bd:serviceParam wikibase:language "en".
                 }
             }
-            LIMIT 10
+            LIMIT 1000
     `;
     const bindings = await client.query.select(query);
     res.status(200).json(bindings);
