@@ -30,15 +30,27 @@ const BookDetails = () => {
 
   return (
     <div className="container page py-5">
-      <h1>Book Details: {id && id}</h1>
+      <h1 className="mb-5">Book Details: {id && id}</h1>
       <p>Title: {details.bookLabel.value}</p>
+      {details.title && <p>Original title: {details.title.value}</p>}
+      <p>Type: {details.instanceOfLabel.value}</p>
       <p>Author: {details.authorLabel.value}</p>
       <p>
         <a href={details.author.value}>About author</a>
       </p>
+      <p>
+        Publication date:{" "}
+        {new Date(details.date.value).toString() !== "Invalid Date"
+          ? new Date(details.date.value).toString()
+          : "Unknown"}
+      </p>
       <p>Description: {details.bookDescription.value}</p>
       {details.image && (
-        <img src={details.image.value} alt={details.title.value} />
+        <img
+          src={details.image.value}
+          alt={details.title.value}
+          loading="lazy"
+        />
       )}
     </div>
   );

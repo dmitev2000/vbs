@@ -16,7 +16,7 @@ export const FetchBooks = async (req, res, next) => {
                     bd:serviceParam wikibase:language "en".
                 }
             }
-            LIMIT 1000
+            LIMIT 10
     `;
     const bindings = await client.query.select(query);
     res.status(200).json(bindings);
@@ -29,7 +29,7 @@ export const FetchBooks = async (req, res, next) => {
 export const GetBookByID = async (req, res, next) => {
   try {
     const query = `
-      SELECT ?book ?bookLabel ?bookDescription ?image ?title ?author ?authorLabel
+      SELECT ?book ?bookLabel ?bookDescription ?image ?title ?author ?authorLabel ?instanceOfLabel ?date
         WHERE {
           BIND(wd:${req.body.id} AS ?book)
           ?book rdfs:label ?bookLabel .
@@ -44,6 +44,9 @@ export const GetBookByID = async (req, res, next) => {
             ?author rdfs:label ?authorLabel .
             FILTER(LANG(?authorLabel) = "en")
           }
+          ?book wdt:P31 ?instanceOf.
+          SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
+          OPTIONAL { ?book wdt:P577 ?date. }
       }`
     const book = await client.query.select(query);    
     res.status(200).json(book);

@@ -3,7 +3,7 @@ import TableRow from "./TableRow";
 
 const DataTable = ({ books }) => {
   return (
-    <table id="table" className="table table-bordered table-responsive">
+    <table id="table" className="table table-bordered table-hover">
       <thead className="table-dark">
         <tr>
           <th>Book title</th>

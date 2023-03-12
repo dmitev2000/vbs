@@ -1,15 +1,15 @@
 import React from "react";
 import "./Layout.css";
-import logo from "../../assets/vite.svg";
+import logo from '../../assets/book.png';
 
 const Footer = () => {
   return (
     <footer>
       <div className="container">
         <div className="d-flex justify-content-start align-items-center">
-          <img src={logo} alt="react-logo" />
+          <img src={logo} alt="react-logo" style={{maxHeight: "30px"}} />
           <p className="my-0 mx-2 text-muted">
-            &copy; {new Date().getFullYear()} WikiData Books, Inc
+            &copy; {new Date().getFullYear()} Wiki Books, Inc
           </p>
         </div>
         <div>

@@ -1,12 +1,14 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
+import Book from "../../assets/book.png";
 
 const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
-          WDBooks
+          <img src={Book} alt="book" className="mx-2" style={{maxHeight: "30px"}} />
+          <span>Wiki Books</span>
         </Link>
         <button
           className="navbar-toggler"
@@ -37,9 +39,7 @@ const Navbar = () => {
               </NavLink>
             </li>
           </ul>
-          <span className="navbar-text">
-            No content
-          </span>
+          <span className="navbar-text">No content</span>
         </div>
       </div>
     </nav>
