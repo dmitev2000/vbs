@@ -1,26 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import TableRow from "./TableRow";
+import DataTable from "datatables.net-dt";
 
-const DataTable = ({ books }) => {
+const DataTableComponent = ({ books }) => {
+  useEffect(() => {
+    new DataTable("#table");
+  }, []);
+
   return (
     <table id="table" className="table table-bordered table-hover">
       <thead className="table-dark">
         <tr>
+          <th>Book cover</th>
           <th>Book title</th>
           <th>Author</th>
-          <th>Country</th>
+          <th>Genre</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         {books.map((book, index) => {
-          return (
-            <TableRow book={book} key={index} />
-          );
+          return <TableRow book={book} key={index} />;
         })}
       </tbody>
     </table>
   );
 };
 
-export default DataTable;
+export default DataTableComponent;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import DataTable from "../DataTable/DataTable";
+import DataTable from "../DataTable/DataTableComponent";
 import Loader from "../Loader/Loader";
 import axios from "axios";
 

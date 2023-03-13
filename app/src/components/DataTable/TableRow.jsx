@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import CoverNotFound from "../../assets/CoverNotFound.png";
 
 const TableRow = ({ book }) => {
   const navigate = useNavigate();
@@ -13,9 +14,16 @@ const TableRow = ({ book }) => {
 
   return (
     <tr>
+      <td>
+        <img
+          className="table-img"
+          src={book.image ? book.image.value : CoverNotFound}
+          alt={book.bookLabel.value}
+        />
+      </td>
       <td>{book.bookLabel.value}</td>
       <td>{book.authorLabel.value}</td>
-      <td>{book.countryLabel ? book.countryLabel.value : "Unknown"}</td>
+      <td>{book.genreLabel ? book.genreLabel.value : "Unknown"}</td>
       <td>
         <button
           onClick={showDetails}

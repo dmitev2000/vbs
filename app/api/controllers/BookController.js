@@ -6,18 +6,21 @@ const client = new ParsingClient({ endpointUrl });
 export const FetchBooks = async (req, res, next) => {
   try {
     const query = `
-        SELECT DISTINCT ?book ?bookLabel ?author ?authorLabel ?countryLabel ?image
-            WHERE {
-                ?book wdt:P31 wd:Q7725634;
-                        wdt:P50 ?author.
-                OPTIONAL { ?author wdt:P27 ?country. }
-                OPTIONAL { ?book wdt:P18 ?image. }
-                SERVICE wikibase:label {
-                    bd:serviceParam wikibase:language "en".
-                }
-            }
-            LIMIT 1000
-    `;
+      SELECT DISTINCT ?book ?bookLabel ?author ?authorLabel ?genreLabel ?image
+        WHERE {
+          ?book wdt:P31 wd:Q7725634;
+                wdt:P50 ?author.
+          OPTIONAL { ?book wdt:P136 ?genre. }
+          OPTIONAL { ?book wdt:P18 ?image. }
+          SERVICE wikibase:label {
+            bd:serviceParam wikibase:language "en".
+            ?author rdfs:label ?authorLabel.
+            ?book rdfs:label ?bookLabel.
+            ?genre rdfs:label ?genreLabel.
+          }
+        }
+      LIMIT 1000
+      `;
     const bindings = await client.query.select(query);
     res.status(200).json(bindings);
   } catch (error) {

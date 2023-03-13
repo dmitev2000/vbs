@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "datatables": "^1.10.18",
+    "datatables.net-dt": "^1.13.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-filter-and-pagination-table": "^1.0.5",
