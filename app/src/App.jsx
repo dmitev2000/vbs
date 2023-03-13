@@ -4,6 +4,7 @@ import NotFound from "./components/Pages/NotFound";
 import MyFavoriteBooks from "./components/Pages/MyFavoriteBooks";
 import FetchBooks from "./components/Pages/FetchBooks";
 import BookDetails from "./components/Pages/BookDetails";
+import AboutAuthor from './components/Pages/AboutAuthor';
 import "./App.css";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route path="/books" element={<FetchBooks />} />
         <Route path="/books/:id" element={<BookDetails />} />
         <Route path="/favorites" element={<MyFavoriteBooks />} />
+        <Route path="/authors/:id" element={<AboutAuthor />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

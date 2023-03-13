@@ -14,3 +14,18 @@ img {
 .page {
   min-height: calc(100vh - 170px);
 }
+
+.avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: fit-content;
+}
+
+.avatar-img {
+  min-height: 250px;
+  min-width: 250px;
+  border-radius: 5px;
+}

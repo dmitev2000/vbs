@@ -10,7 +10,7 @@ const FetchBooks = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:5000/api/fetch/")
+      .get("http://localhost:5000/api/books/fetch/")
       .then((res) => {
         setData(res.data);
         setLoading(false);

@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Loader from "../Loader/Loader";
 import axios from "axios";
@@ -7,15 +7,19 @@ import axios from "axios";
 const BookDetails = () => {
   const [details, setDetails] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [authorID, setAuthorID] = useState(null);
   const { id } = useParams();
 
   useEffect(() => {
     setLoading(true);
     axios
-      .post("http://localhost:5000/api/fetch-by-id", { id: id })
+      .post("http://localhost:5000/api/books/fetch-by-id", { id: id })
       .then((res) => {
         setDetails(res.data[0]);
         setLoading(false);
+        const author = res.data[0].author.value;
+        const split = author.split("/");
+        setAuthorID(split[split.length - 1]);
       })
       .catch((err) => console.error(err));
   }, []);
@@ -34,9 +38,9 @@ const BookDetails = () => {
       <p>Title: {details.bookLabel.value}</p>
       {details.title && <p>Original title: {details.title.value}</p>}
       <p>Type: {details.instanceOfLabel.value}</p>
-      <p>Author: {details.authorLabel.value}</p>
       <p>
-        <a href={details.author.value}>About author</a>
+        Author: {" "}
+        <Link to={`/authors/${authorID}`}>{details.authorLabel.value}</Link>
       </p>
       <p>
         Publication date:{" "}
@@ -49,7 +53,7 @@ const BookDetails = () => {
       {details.image && (
         <img
           src={details.image.value}
-          alt={details.title.value}
+          alt={details.bookLabel.value}
           loading="lazy"
         />
       )}
