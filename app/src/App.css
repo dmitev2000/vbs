@@ -35,6 +35,16 @@ img {
   text-decoration: none;
 }
 
-.tbale-img {
+.table-img {
   max-height: 150px;
+}
+
+.auth {
+  width: 500px;
+}
+
+@media screen and (max-width: 520px) {
+  .auth {
+    width: 90%;
+  }
 }

@@ -4,10 +4,13 @@ import App from "./App";
 import "./index.css";
 import { BrowserRouter as Router } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
+import { AuthContextProvider } from "./context/AuthContext";
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <Router>
-    <Layout>
-      <App />
-    </Layout>
-  </Router>
+  <AuthContextProvider>
+    <Router>
+      <Layout>
+        <App />
+      </Layout>
+    </Router>
+  </AuthContextProvider>
 );
