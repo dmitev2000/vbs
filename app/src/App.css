@@ -2,7 +2,7 @@
 @import url("../node_modules/datatables.net-dt/css/jquery.dataTables.css");
 
 img {
-  max-height: 100px;
+  max-height: 225px;
 }
 
 .page-loader {

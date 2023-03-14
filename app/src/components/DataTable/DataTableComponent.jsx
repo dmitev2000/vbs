@@ -4,7 +4,12 @@ import DataTable from "datatables.net-dt";
 
 const DataTableComponent = ({ books }) => {
   useEffect(() => {
-    new DataTable("#table");
+    const aa = {
+      language:{
+        searchPlaceholder: "Book title, Author, Genre"
+      }
+    }
+    new DataTable("#table", aa);
   }, []);
 
   return (
