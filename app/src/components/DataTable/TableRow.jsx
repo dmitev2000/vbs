@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import CoverNotFound from "../../assets/CoverNotFound.png";
 import { AuthContext } from "../../context/AuthContext";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/dist/sweetalert2.css";
 import axios from "axios";
 
 const TableRow = ({ book }) => {
@@ -27,7 +29,12 @@ const TableRow = ({ book }) => {
         const newUser = user;
         user.favBooks = books;
         dispatch({ type: "UPDATE_BOOKS", payload: newUser });
-        alert(`Book ${bookID} added to favorites`);
+        Swal.fire({
+          title: "Great!",
+          text: "Book added to favorites!",
+          icon: "success",
+          confirmButtonText: "Ok",
+        });
       })
       .catch((err) => console.error(err));
   };
@@ -39,19 +46,20 @@ const TableRow = ({ book }) => {
         bookId: bookID,
       })
       .then((res) => {
-        console.log(res.data);
         const books = user.favBooks;
         const bookToRemoveIndex = books.indexOf(bookID);
-        console.log(bookToRemoveIndex);
-        console.log(books);
         if (bookToRemoveIndex !== -1) {
           books.splice(bookToRemoveIndex, 1);
-        } 
-        console.log(books);
+        }
         const newUser = user;
         user.favBooks = books;
         dispatch({ type: "UPDATE_BOOKS", payload: newUser });
-        alert(`Book ${bookID} removed from favorites.`);
+        Swal.fire({
+          title: "Note!",
+          text: "Book removed from favorites!",
+          icon: "error",
+          confirmButtonText: "Ok",
+        });
       })
       .catch((err) => console.error(err));
   };
