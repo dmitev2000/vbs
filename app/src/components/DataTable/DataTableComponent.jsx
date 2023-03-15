@@ -13,7 +13,7 @@ const DataTableComponent = ({ books }) => {
   }, []);
 
   return (
-    <table id="table" className="table table-bordered table-hover">
+    <table id="table" className="table table-bordered table-striped">
       <thead className="table-dark">
         <tr>
           <th>Book cover</th>

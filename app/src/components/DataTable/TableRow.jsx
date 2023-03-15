@@ -87,16 +87,18 @@ const TableRow = ({ book }) => {
           (user.favBooks.includes(bookID) ? (
             <button
               onClick={RemoveFavoriteHandler}
-              className="btn btn-outline-danger"
+              className="btn btn-outline-danger w-100"
+              title="Remove from favorites"
             >
-              Remove from favorites
+            <i className="bi bi-x-circle"></i>
             </button>
           ) : (
             <button
               onClick={AddToFavoritesHandler}
               className="btn btn-outline-success w-100"
+              title="Add to favorites"
             >
-              Add to favorites
+              <i className="bi bi-plus-circle"></i>
             </button>
           ))}
       </td>
