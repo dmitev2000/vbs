@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import BookRoutes from "./routes/BookRoutes.js";
 import AuthorRoutes from "./routes/AuthorRoutes.js";
 import AuthRoutes from "./routes/AuthRoutes.js";
+import FavoritesRoutes from "./routes/FavoritesRoutes.js";
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -21,6 +22,7 @@ app.use(express.json({ limit: "10mb" }));
 app.use("/api/books/", BookRoutes);
 app.use("/api/authors/", AuthorRoutes);
 app.use("/api/auth/", AuthRoutes);
+app.use("/api/favorites/", FavoritesRoutes);
 
 // Error handler
 app.use((err, req, res, next) => {

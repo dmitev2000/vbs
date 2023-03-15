@@ -35,6 +35,12 @@ const AuthReducer = (state, action) => {
         loading: false,
         error: null,
       };
+    case "UPDATE_BOOKS":
+      return {
+        loading: false,
+        error: null,
+        user: action.payload,
+      };
     default:
       return state;
   }

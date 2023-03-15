@@ -1,4 +1,5 @@
 import User from "../models/UserModel.js";
+import Favorites from "../models/FavoriteBooksModel.js";
 import { createError } from "../utils/Error.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -46,6 +47,9 @@ export const login = async (req, res, next) => {
     const token = jwt.sign({ id: user._id }, process.env.JWT);
 
     const { password, ...otherProps } = user._doc;
+    
+    const favBooks = await Favorites.find({ userID: user._id }).distinct("bookID");
+
     res
       .cookie("access_token", token, {
         httpOnly: true,
@@ -54,7 +58,7 @@ export const login = async (req, res, next) => {
         path: "/",
       })
       .status(200)
-      .json({ ...otherProps });
+      .json({ ...otherProps, favBooks });
   } catch (err) {
     next(err);
   }
