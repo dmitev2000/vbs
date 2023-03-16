@@ -43,6 +43,10 @@ img {
   width: 500px;
 }
 
+.a-details > div:not(:last-child) {
+  padding-right: 35px;
+}
+
 @media screen and (max-width: 520px) {
   .auth {
     width: 90%;
