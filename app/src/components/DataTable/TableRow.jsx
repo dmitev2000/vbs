@@ -29,12 +29,22 @@ const TableRow = ({ book }) => {
         const newUser = user;
         user.favBooks = books;
         dispatch({ type: "UPDATE_BOOKS", payload: newUser });
-        Swal.fire({
-          title: "Great!",
-          text: "Book added to favorites!",
-          icon: "success",
-          confirmButtonText: "Ok",
-        });
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+         
+        Toast.fire({
+          icon: 'success',
+          title: 'The book has been successfully added to your favorites.'
+        })
       })
       .catch((err) => console.error(err));
   };
