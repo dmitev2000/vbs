@@ -50,10 +50,36 @@ export const GetBookByID = async (req, res, next) => {
           ?book wdt:P31 ?instanceOf.
           SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
           OPTIONAL { ?book wdt:P577 ?date. }
-      }`
-    const book = await client.query.select(query);    
+      }`;
+    const book = await client.query.select(query);
     res.status(200).json(book);
   } catch (error) {
     res.status(error.status).json(error.message);
   }
+};
+
+export const FetchFavoriteBooks = async (req, res, next) => {
+  try {
+    const response = [];
+    for (var i = 0; i < req.body.bookIDs.length; i++) {
+      const query = `
+      SELECT DISTINCT ?book ?bookLabel ?author ?authorLabel ?genreLabel ?image
+        WHERE {
+          BIND(wd:${req.body.bookIDs[i]} AS ?book)
+          ?book wdt:P50 ?author.
+          OPTIONAL { ?book wdt:P136 ?genre. }
+          OPTIONAL { ?book wdt:P18 ?image. }
+          SERVICE wikibase:label {
+            bd:serviceParam wikibase:language "en".
+            ?author rdfs:label ?authorLabel.
+            ?book rdfs:label ?bookLabel.
+            ?genre rdfs:label ?genreLabel.
+          }
+        } LIMIT 1
+      `;
+      const book = await client.query.select(query);
+      response.push(book[0]);
+    }
+    res.status(200).json(response);
+  } catch (error) {}
 };
