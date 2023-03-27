@@ -27,7 +27,7 @@ const MyFavoriteBooks = () => {
         })
         .catch((err) => console.error(err));
     }
-  }, [user.favBooks]);
+  }, []);
 
   if (loading) {
     return (
@@ -39,7 +39,7 @@ const MyFavoriteBooks = () => {
 
   return (
     <div className="container py-5 page">
-      <h1>My Favorite Books</h1>
+      <h1 className="mb-5">My Favorite Books</h1>
       {user && user.favBooks.length === 0 ? (
         <p className="text-muted">You don't have any favorites yet.</p>
       ) : (

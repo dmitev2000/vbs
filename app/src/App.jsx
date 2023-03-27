@@ -8,6 +8,7 @@ import AboutAuthor from "./components/Pages/AboutAuthor";
 import Register from "./components/Pages/Register";
 import Login from "./components/Pages/Login";
 import "./App.css";
+import GenreDetails from "./components/Pages/GenreDetails";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/books/:id" element={<BookDetails />} />
         <Route path="/favorites" element={<MyFavoriteBooks />} />
         <Route path="/authors/:id" element={<AboutAuthor />} />
+        <Route path="/genres/:id" element={<GenreDetails />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

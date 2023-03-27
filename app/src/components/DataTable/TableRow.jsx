@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CoverNotFound from "../../assets/CoverNotFound.png";
 import { AuthContext } from "../../context/AuthContext";
@@ -12,9 +12,45 @@ const TableRow = ({ book }) => {
   const { user, dispatch } = authCtx;
   const split = book.book.value.split("/");
   const bookID = split[split.length - 1];
+  const a_split = book.author.value.split("/");
+  const authorID = a_split[a_split.length - 1];
+  let g_split = undefined;
+  if (book.genre) {
+    g_split = book.genre.value.split("/");
+  }
+  let genreID = undefined;
+  if (g_split) {
+    genreID = g_split[g_split.length - 1];
+  }
 
-  const showDetails = () => {
+  const showBookDetails = () => {
     navigate(`/books/${bookID}`);
+  };
+
+  const showAuthorDetails = () => {
+    navigate(`/authors/${authorID}`);
+  };
+
+  const showGenreDetails = () => {
+    if (!genreID) {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener("mouseenter", Swal.stopTimer);
+          toast.addEventListener("mouseleave", Swal.resumeTimer);
+        },
+      });
+      Toast.fire({
+        icon: "error",
+        title: "Sorry, we cannot provide information for this genre.",
+      });
+      return;
+    }
+    navigate(`/genres/${genreID}`);
   };
 
   const AddToFavoritesHandler = () => {
@@ -84,19 +120,23 @@ const TableRow = ({ book }) => {
 
   return (
     <tr>
-      <td>
+      <td onClick={showBookDetails}>
         <img
           className="table-img"
           src={book.image ? book.image.value : CoverNotFound}
           alt={book.bookLabel.value}
         />
       </td>
-      <td>{book.bookLabel.value}</td>
-      <td>{book.authorLabel.value}</td>
-      <td>{book.genreLabel ? book.genreLabel.value : "Unknown"}</td>
+      <td onClick={showBookDetails} className="table-data">
+        {book.bookLabel.value}
+      </td>
+      <td onClick={showAuthorDetails}>{book.authorLabel.value}</td>
+      <td onClick={showGenreDetails}>
+        {book.genreLabel ? book.genreLabel.value : "Unknown"}
+      </td>
       <td>
         <button
-          onClick={showDetails}
+          onClick={showBookDetails}
           className="btn btn-outline-primary w-100 my-1"
         >
           Details
@@ -116,7 +156,7 @@ const TableRow = ({ book }) => {
               className="btn btn-outline-success w-100"
               title="Add to favorites"
             >
-              <i className="bi bi-plus-circle"></i>
+              <i className="bi bi-star"></i>
             </button>
           ))}
       </td>

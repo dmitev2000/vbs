@@ -47,6 +47,46 @@ img {
   padding-right: 35px;
 }
 
+td {
+  cursor: pointer;
+}
+
+td:hover {
+  font-weight: bold;
+  opacity: .8;
+  text-decoration: underline;
+}
+
+.custom-button {
+  color: white;
+  text-decoration: none;
+  border: none;
+  background: none;
+  text-transform: uppercase;
+  font-family: 'Poppins', sans-serif;
+}
+
+.custom-button:hover {
+  color: white;
+}
+
+.custom-button::before {
+  margin-left: auto;
+}
+
+.custom-button::after, .custom-button::before {
+  content: '';
+  width: 0%;
+  height: 2px;
+  background: #f44336;
+  display: block;
+  transition: 0.5s;
+}
+
+.custom-button:hover::after, .custom-button:hover::before {
+  width: 100%;
+}
+
 @media screen and (max-width: 520px) {
   .auth {
     width: 90%;

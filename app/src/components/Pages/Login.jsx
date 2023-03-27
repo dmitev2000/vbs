@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/dist/sweetalert2.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -20,12 +22,26 @@ const Login = () => {
         "http://localhost:5000/api/auth/login",
         credentials
       );
-      console.log(res.data);
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
       localStorage.setItem(
         "user",
         JSON.stringify({ _id: res.data._id, username: res.data.username })
       );
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener("mouseenter", Swal.stopTimer);
+          toast.addEventListener("mouseleave", Swal.resumeTimer);
+        },
+      });
+      Toast.fire({
+        icon: "success",
+        title: `Hello ${res.data.username}! You are now logged in.`,
+      });
       navigate("/");
     } catch (err) {
       dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });

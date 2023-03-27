@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import Book from "../../assets/book.png";
 import { AuthContext } from "../../context/AuthContext";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/dist/sweetalert2.css";
 
 const Navbar = () => {
   const AuthCtx = useContext(AuthContext);
@@ -11,6 +13,21 @@ const Navbar = () => {
   const Logout = () => {
     dispatch({ type: "LOGOUT" });
     localStorage.removeItem("user");
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener("mouseenter", Swal.stopTimer);
+        toast.addEventListener("mouseleave", Swal.resumeTimer);
+      },
+    });
+    Toast.fire({
+      icon: "error",
+      title: `Goodbye ${user.username}! You are now logged out.`,
+    });
     navigate("/");
   };
 
@@ -56,19 +73,19 @@ const Navbar = () => {
             </li>
           </ul>
           {!user ? (
-            <div className="text-light">
-              <Link className="btn btn-outline-success" to="/login">
+            <div className="text-light d-flex">
+              <Link className="custom-button" to="/login">
                 Login
               </Link>
-              <Link className="mx-3 btn btn-outline-success" to="/register">
+              <Link className="mx-3 custom-button" to="/register">
                 Register
               </Link>
             </div>
           ) : (
             <div>
               <span className="text-light">Hello, {user.username}</span>
-              <button className="btn btn-outline-danger mx-3" onClick={Logout}>
-                Logout
+              <button className="btn btn-danger mx-3" onClick={Logout} title="Logout">
+                <i className="bi bi-box-arrow-right"></i>
               </button>
             </div>
           )}

@@ -6,7 +6,7 @@ const client = new ParsingClient({ endpointUrl });
 export const FetchBooks = async (req, res, next) => {
   try {
     const query = `
-      SELECT DISTINCT ?book ?bookLabel ?author ?authorLabel ?genreLabel ?image
+      SELECT DISTINCT ?book ?bookLabel ?author ?authorLabel ?genre ?genreLabel ?image
         WHERE {
           ?book wdt:P31 wd:Q7725634;
                 wdt:P50 ?author.
@@ -63,7 +63,7 @@ export const FetchFavoriteBooks = async (req, res, next) => {
     const response = [];
     for (var i = 0; i < req.body.bookIDs.length; i++) {
       const query = `
-      SELECT DISTINCT ?book ?bookLabel ?author ?authorLabel ?genreLabel ?image
+      SELECT DISTINCT ?book ?bookLabel ?author ?authorLabel ?genre ?genreLabel ?image
         WHERE {
           BIND(wd:${req.body.bookIDs[i]} AS ?book)
           ?book wdt:P50 ?author.

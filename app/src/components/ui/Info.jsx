@@ -13,14 +13,17 @@ const Info = ({ author, education }) => {
         <b>{new Date(author.birthDate.value).toString().substring(4, 15)}</b> in{" "}
         {author.birthPlaceLabel.value}
       </p>
-      <p>
-        Died:{" "}
-        <b>{new Date(author.deathDate.value).toString().substring(4, 15)}</b> in{" "}
-        {author.deathPlaceLabel.value}
-      </p>
+      { author.deathDate &&
+        <p>
+          Died:{" "}
+          <b>{new Date(author.deathDate.value).toString().substring(4, 15)}</b>{" "}
+          in {author.deathPlaceLabel.value}
+        </p>
+      }
       {author.lastWords && (
         <p>
-          Last words: <span className="fst-italic">,,{author.lastWords.value}"</span>
+          Last words:{" "}
+          <span className="fst-italic">,,{author.lastWords.value}"</span>
         </p>
       )}
       {education && (

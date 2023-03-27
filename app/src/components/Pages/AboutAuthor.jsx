@@ -18,7 +18,6 @@ const AboutAuthor = () => {
     axios
       .post("http://localhost:5000/api/authors/", { id: id })
       .then((res) => {
-        console.log(res.data);
         setAboutAuthor(res.data);
         setLoading(false);
       })
