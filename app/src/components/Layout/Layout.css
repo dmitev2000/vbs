@@ -1,21 +1,39 @@
 nav {
-    min-height: 80px;
-    margin: 0;
+  min-height: 80px;
+  margin: 0;
 }
 
 footer {
-    box-shadow: 0 0 7px;
-    margin-top: 10px;
+  box-shadow: 0 0 7px;
 }
 
 footer > div {
-    min-height: 80px;
-    background-color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  min-height: 80px;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 footer > div {
-    font-size: 20px;
+  font-size: 20px;
+}
+
+.logout-btn {
+  width: 80px;
+  position: relative;
+  height: 2.5em;
+  border: 3px ridge #b10e0e;
+  outline: none;
+  background-color: transparent;
+  color: #b10e0e;
+  transition: 1s;
+  border-radius: 0.3em;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.logout-btn:hover {
+  box-shadow: inset 0px 0px 25px #b10e0e;
+  color: white;  
 }

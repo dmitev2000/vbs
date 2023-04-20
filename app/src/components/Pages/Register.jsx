@@ -6,12 +6,17 @@ import { useState } from "react";
 const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    setError(null);
     e.preventDefault();
+    if (confirmPassword !== password) {
+      setError("Passwords don't match.");
+      return;
+    }
+    setError(null);
     await axios
       .post("http://localhost:5000/api/auth/register", {
         username: username,
@@ -28,7 +33,7 @@ const Register = () => {
   return (
     <div className="d-flex justify-content-center align-items-center page">
       <div className="auth">
-        <h1 className="my-4">Sign up</h1>
+        <h1 className="my-4 auth-title">Sign up</h1>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <label htmlFor="username" className="form-label">
@@ -60,6 +65,21 @@ const Register = () => {
               }}
             />
           </div>
+          <div className="mb-3">
+            <label htmlFor="exampleInputPassword2" className="form-label">
+              Confirm Password
+            </label>
+            <input
+              type="password"
+              className="form-control"
+              id="exampleInputPassword2"
+              required
+              minLength={8}
+              onChange={(e) => {
+                setConfirmPassword(e.target.value);
+              }}
+            />
+          </div>
           {error && (
             <>
               <span className="text-danger fw-bold mb-3">{error}</span>
@@ -67,7 +87,7 @@ const Register = () => {
               <br />
             </>
           )}
-          <button type="submit" className="btn btn-outline-success">
+          <button type="submit" className="find-books-lite">
             Sign up
           </button>
         </form>

@@ -1,17 +1,21 @@
 import React, { useContext } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import Book from "../../assets/book.png";
 import { AuthContext } from "../../context/AuthContext";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/dist/sweetalert2.css";
+import BookContext from "../../context/BooksContext";
 
 const Navbar = () => {
   const AuthCtx = useContext(AuthContext);
+  const BookCtx = useContext(BookContext);
   const { user, dispatch } = AuthCtx;
   const navigate = useNavigate();
+  const location = useLocation();
 
   const Logout = () => {
     dispatch({ type: "LOGOUT" });
+    BookCtx.updateBooks(null);
     localStorage.removeItem("user");
     const Toast = Swal.mixin({
       toast: true,
@@ -32,7 +36,14 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav
+      className="navbar navbar-expand-lg navbar-dark fixed-top"
+      style={
+        location.pathname === "/"
+          ? { backgroundColor: "transparent" }
+          : { backgroundColor: "#292b2c" }
+      }
+    >
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
           <img
@@ -41,7 +52,7 @@ const Navbar = () => {
             className="mx-2"
             style={{ maxHeight: "30px" }}
           />
-          <span>Wiki Books</span>
+          <span>WikiBooks</span>
         </Link>
         <button
           className="navbar-toggler"
@@ -73,18 +84,20 @@ const Navbar = () => {
             </li>
           </ul>
           {!user ? (
-            <div className="text-light d-flex">
+            <div className="text-light right-nav-part">
               <Link className="custom-button" to="/login">
                 Login
               </Link>
-              <Link className="mx-3 custom-button" to="/register">
+              <Link className="custom-button" to="/register">
                 Register
               </Link>
             </div>
           ) : (
-            <div>
-              <span className="text-light">Hello, {user.username}</span>
-              <button className="btn btn-danger mx-3" onClick={Logout} title="Logout">
+            <div className="right-nav-part">
+              <span className="text-light">
+                <i className="bi bi-person"></i> {user.username}
+              </span>
+              <button className="logout-btn" onClick={Logout} title="Logout">
                 <i className="bi bi-box-arrow-right"></i>
               </button>
             </div>

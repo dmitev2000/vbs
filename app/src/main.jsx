@@ -5,12 +5,16 @@ import "./index.css";
 import { BrowserRouter as Router } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
 import { AuthContextProvider } from "./context/AuthContext";
+import { BooksContextProvider } from "./context/BooksContext";
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <AuthContextProvider>
-    <Router>
-      <Layout>
-        <App />
-      </Layout>
-    </Router>
+    <BooksContextProvider>
+      <Router>
+        <Layout>
+          <App />
+        </Layout>
+      </Router>
+    </BooksContextProvider>
   </AuthContextProvider>
 );

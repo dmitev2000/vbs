@@ -55,7 +55,7 @@ const Login = () => {
   return (
     <div className="d-flex justify-content-center align-items-center page">
       <div className="auth">
-        <h1 className="my-4">Sign in</h1>
+        <h1 className="my-4 auth-title">Sign in</h1>
         <form onSubmit={handleLogin}>
           <div className="mb-3">
             <label htmlFor="username" className="form-label">
@@ -93,7 +93,7 @@ const Login = () => {
               <br />
             </>
           )}
-          <button type="submit" className="btn btn-outline-success">
+          <button type="submit" className="find-books-lite">
             Sign in
           </button>
         </form>

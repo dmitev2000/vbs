@@ -34,7 +34,7 @@ const AboutAuthor = () => {
 
   return (
     <div className="container page py-5">
-      <h1 className="mb-5">About {aboutAuthor.author[0].nameLabel.value} ({id && id})</h1>
+      <h1 className="mb-5 mt-4 pt-5">About {aboutAuthor.author[0].nameLabel.value} ({id && id})</h1>
       <div className="d-flex justify-content-evenly align-items-start flex-wrap a-details">
         <Avatar
           image={aboutAuthor.author[0].image.value}
