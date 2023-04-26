@@ -9,24 +9,40 @@ const Info = ({ author, education }) => {
         Name: <b>{author.nameLabel.value}</b>
       </p>
       <p>
-        Born:{" "}
-        <b>{new Date(author.birthDate.value).toString().substring(4, 15)}</b> in{" "}
-        {author.birthPlaceLabel.value}
+        {author.birthPlaceLabel && author.birthPlaceLabel.value ? (
+          <>
+            Born:{" "}
+            <b>
+              {new Date(author.birthDate.value).toString().substring(4, 15)}
+            </b>{" "}
+            in {author.birthPlaceLabel.value}
+          </>
+        ) : (
+          ""
+        )}
       </p>
-      { author.deathDate &&
+      {author.deathDate && (
         <p>
-          Died:{" "}
-          <b>{new Date(author.deathDate.value).toString().substring(4, 15)}</b>{" "}
-          in {author.deathPlaceLabel.value}
+          {author.deathPlaceLabel && author.deathDate.value ? (
+            <>
+              Died:{" "}
+              <b>
+                {new Date(author.deathDate.value).toString().substring(4, 15)}
+              </b>{" "}
+              in {author.deathPlaceLabel.value}
+            </>
+          ) : (
+            ""
+          )}
         </p>
-      }
+      )}
       {author.lastWords && (
         <p>
           Last words:{" "}
           <span className="fst-italic">,,{author.lastWords.value}"</span>
         </p>
       )}
-      {education && (
+      {education && education.length !== 0 && (
         <>
           <p>Education:</p>
           <ul>
